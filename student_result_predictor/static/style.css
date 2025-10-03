@@ -1,0 +1,31 @@
+/* General body styling */
+body {
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa; /* Bootstrap's light gray */
+  margin: 0;
+  padding: 0;
+}
+
+/* Card styling */
+.card {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  border: none;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+}
+
+/* Headings */
+h2, h3 {
+  font-weight: 600;
+}
+
+/* Container spacing */
+.container {
+  max-width: 900px;
+}
