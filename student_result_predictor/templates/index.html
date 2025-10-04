@@ -13,6 +13,8 @@
         <h3 class="text-center mb-4">Student Result Predictor (Decision Tree)</h3> -->
         <form action="{{ url_for('predict') }}" method="post">
 
+
+            <!-- Sleep & Study Tracker -->
               <div class="card">
                 <div class="card-header">
                     <span class="icon moon">🌙</span>
@@ -29,15 +31,38 @@
             <input type="number" name="sleep_hours" class="form-control" min="4" max="9" step="1" required>
           </div>
 
+            <!-- Attendance Tracker -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon check">✓</span>
+                    <h2>Attendance Tracker</h2>
+                </div>
+
+
           <div class="mb-3">
             <label class="form-label">Absences (0 - 20)</label>
             <input type="number" name="absences" class="form-control" min="0" max="20" step="1" required>
           </div>
 
+                      <!-- Assignment Tracker -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon clipboard">📋</span>
+                    <h2>Assignment Tracker</h2>
+                </div>
+
+
           <div class="mb-3">
             <label class="form-label">Assignments completed (0 - 10)</label>
             <input type="number" name="assignments_completed" class="form-control" min="0" max="10" step="1" required>
           </div>
+
+                      <!-- Previous Exam Scores -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon graduation">🎓</span>
+                    <h2>Previous Exam Scores</h2>
+                </div>
 
           <div class="mb-3">
             <label class="form-label">Exam Score (40 - 100)</label>
