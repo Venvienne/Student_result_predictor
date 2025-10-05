@@ -7,6 +7,7 @@ import sys
 # Add the parent directory to the path to import modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# Initialize Flask app
 app = Flask(__name__, 
            template_folder='../templates',
            static_folder='../static')
@@ -69,12 +70,8 @@ def test_result():
         exam_score=92
     )
 
-# This is important for Vercel
+# Configure for production
 app.config['DEBUG'] = False
-
-# Export the app for Vercel
-def handler(request):
-    return app(request.environ, lambda *args: None)
 
 # For local development
 if __name__ == '__main__':
