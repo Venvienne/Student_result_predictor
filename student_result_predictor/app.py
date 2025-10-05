@@ -44,5 +44,19 @@ def predict():
     except Exception as e:
         return f"Error: {e}", 400
 
+@app.route('/test-result')
+def test_result():
+    # Sample data for testing the result page design
+    return render_template(
+        'result.html',
+        prediction='Pass',
+        probability=85.67,
+        study_hours=7,
+        sleep_hours=8,
+        absences=2,
+        assignments_completed=15,
+        exam_score=92
+    )
+
 if __name__ == '__main__':
     app.run(debug=True)
