@@ -2,10 +2,9 @@ services:
   - type: web
     name: student-predictor-api
     env: python
-    runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn backend_api:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: 3.11.9
     healthCheckPath: /health
