@@ -2,21 +2,19 @@ from flask import Flask, render_template, request, jsonify
 import os
 import sys
 
+# Get the base directory (project root)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # Simple Flask app setup for Vercel
-app = Flask(__name__)
-
-# Set template and static folders relative to this file
-template_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates')
-static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static')
-
-app.template_folder = template_dir
-app.static_folder = static_dir
+app = Flask(__name__, 
+            template_folder=os.path.join(BASE_DIR, 'templates'),
+            static_folder=os.path.join(BASE_DIR, 'static'))
 
 # Simple model loading (create a dummy model for now to test)
 try:
     import joblib
     import numpy as np
-    model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'model', 'dt_model.joblib')
+    model_path = os.path.join(BASE_DIR, 'model', 'dt_model.joblib')
     model = joblib.load(model_path) if os.path.exists(model_path) else None
 except ImportError:
     model = None
@@ -128,7 +126,7 @@ def test():
         "python_version": sys.version
     })
 
-# For Vercel
+# For Vercel - export the app
 app.config['DEBUG'] = False
 
 if __name__ == '__main__':
