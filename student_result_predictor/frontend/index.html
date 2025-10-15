@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Result Predictor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form id="predictionForm">
+          
+          <!-- Sleep & Study Tracker -->
+          <div class="card">
+            <div class="card-header">
+              <span class="icon moon">🌙</span>
+              <h2>Sleep & Study Tracker</h2>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">Study hours per day (0 - 8)</label>
+                <input type="number" id="study_hours" name="study_hours" class="form-control" min="0" max="8" step="1" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Sleep hours per day (4 - 9)</label>
+                <input type="number" id="sleep_hours" name="sleep_hours" class="form-control" min="4" max="9" step="1" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attendance Tracker -->
+          <div class="card">
+            <div class="card-header">
+              <span class="icon check">✓</span>
+              <h2>Attendance Tracker</h2>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">Absences (0 - 20)</label>
+                <input type="number" id="absences" name="absences" class="form-control" min="0" max="20" step="1" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assignment Tracker -->
+          <div class="card">
+            <div class="card-header">
+              <span class="icon clipboard">📋</span>
+              <h2>Assignment Tracker</h2>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">Assignments completed (0 - 20)</label>
+                <input type="number" id="assignments_completed" name="assignments_completed" class="form-control" min="0" max="20" step="1" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Previous Exam Scores -->
+          <div class="card">
+            <div class="card-header">
+              <span class="icon graduation">🎓</span>
+              <h2>Previous Exam Scores</h2>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">Exam Score (40 - 100)</label>
+                <input type="number" id="exam_score" name="exam_score" class="form-control" min="40" max="100" step="1" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary" id="predictBtn">Predict</button>
+          </div>
+          
+        </form>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="text-center mt-4" style="display: none;">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-2">Making prediction...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="alert alert-danger mt-4" style="display: none;" role="alert"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configure your backend API URL here
+    // For local testing: 'http://localhost:5000'
+    // For production: 'https://your-backend-app.onrender.com'
+    const API_URL = 'https://student-result-predictor.onrender.com'; // Render backend URL
+
+    const form = document.getElementById('predictionForm');
+    const loading = document.getElementById('loading');
+    const errorMessage = document.getElementById('errorMessage');
+    const predictBtn = document.getElementById('predictBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Hide error message
+      errorMessage.style.display = 'none';
+      
+      // Show loading
+      loading.style.display = 'block';
+      predictBtn.disabled = true;
+
+      // Get form data
+      const formData = {
+        study_hours: parseFloat(document.getElementById('study_hours').value),
+        sleep_hours: parseFloat(document.getElementById('sleep_hours').value),
+        absences: parseFloat(document.getElementById('absences').value),
+        assignments_completed: parseFloat(document.getElementById('assignments_completed').value),
+        exam_score: parseFloat(document.getElementById('exam_score').value)
+      };
+
+      try {
+        // Call backend API
+        const response = await fetch(`${API_URL}/predict`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          // Store result in sessionStorage and redirect to result page
+          sessionStorage.setItem('predictionResult', JSON.stringify(data));
+          window.location.href = 'result.html';
+        } else {
+          // Show error
+          errorMessage.textContent = data.error || 'Prediction failed. Please try again.';
+          errorMessage.style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        errorMessage.textContent = 'Failed to connect to the server. Please check your internet connection and try again.';
+        errorMessage.style.display = 'block';
+      } finally {
+        // Hide loading
+        loading.style.display = 'none';
+        predictBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

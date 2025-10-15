@@ -399,6 +399,234 @@ body {
     margin-top: 8px;
 }
 
+/* Result Page Styles */
+.result-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.result-card .card-header {
+    border-bottom: none;
+    color: white;
+}
+
+.result-card .card-header h2 {
+    color: white;
+}
+
+.result-display {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.prediction-badge {
+    display: inline-block;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.prediction-badge.success {
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+}
+
+.prediction-badge.danger {
+    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+}
+
+.prediction-text {
+    color: white;
+}
+
+.confidence-meter {
+    margin-top: 20px;
+}
+
+.confidence-label {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.confidence-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+    border-radius: 6px;
+    transition: width 0.8s ease-in-out;
+}
+
+.confidence-percentage {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.input-summary {
+    padding: 20px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-item .icon-small {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.summary-item .label {
+    flex: 1;
+    font-weight: 600;
+    color: #374151;
+}
+
+.summary-item .value {
+    font-weight: 700;
+    color: #6366f1;
+    font-size: 18px;
+}
+
+.recommendations {
+    padding: 20px;
+}
+
+.recommendation {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.recommendation.success {
+    background: #f0fdf4;
+    border-left: 4px solid #22c55e;
+}
+
+.recommendation.warning {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+}
+
+.recommendation .icon-small {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.recommendation p {
+    margin: 0;
+    color: #374151;
+    line-height: 1.6;
+}
+
+.tips {
+    margin-top: 20px;
+}
+
+.tips h4 {
+    color: #374151;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.tips ul {
+    padding-left: 20px;
+}
+
+.tips li {
+    margin-bottom: 8px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.btn-custom {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-custom.primary {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-custom.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-custom.secondary {
+    background: white;
+    color: #6b7280;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom.secondary:hover {
+    background: #f9fafb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design for Result Page */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-custom {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .prediction-badge {
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+}
+
 .delete-exam:hover {
     background: #fecaca;
 }
